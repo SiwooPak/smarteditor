@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>USER-J</title>
+</head>
+<body>
+	<!-- 아래는 mustache 문법  model 값 smarteditor 값이 존재 할경우 true-->
+	{{#smarteditor}}
+	<p>제목 : {{title}}</p>
+	<p>내용 : {{content}}</p>
+	{{/smarteditor}}
+
+	<a href="/">에디터로 이동</a>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SmartEditor</title>
+<script type="text/javascript" src="/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+<script type="text/javascript">
+	var oEditors = [];
+	$(function() {
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : oEditors,
+			elPlaceHolder : "ir1",
+			sSkinURI : "/se2/SmartEditor2Skin.html",
+			fCreator : "createSEditor2",
+			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+			bUseModeChanger : false
+		});
+
+		//저장버튼 클릭시 form 전송
+		$("#save").click(function() {
+
+			// 에디터의 내용에 대한 값 검증은 이곳에서
+			// document.getElementById("ir1").value를 이용해서 처리한다.
+
+			// 제목 입력 확인
+			if ($("#title").val().length > 1) {
+				oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+				$("#frm").submit();
+			} else {
+				alert("제목을 입력 해주세요.");
+			}
+
+		});
+	});
+</script>
+</head>
+<body>
+	<br>
+	<form id="frm" action="/save" method="post">
+		<p>
+			제목 :
+			<input type="text" id="title" name="title">
+		</p>
+		<textarea name="content" id="ir1" style="width: 80%; overflow: visible;" rows="25"></textarea>
+		<input type="button" id="save" value="저장" />
+		<input type="button" value="취소" />
+	</form>
+</body>
+</html>
